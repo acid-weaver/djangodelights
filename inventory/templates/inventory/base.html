@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html id="main">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<title>{{ title }}</title>
+		<!-- <link rel="icon" type="image/x-icon" href="/media/favicon.jpg"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'inventory/css/uikit.min.css' %}" />
+        <script src="{% static 'inventory/js/uikit.min.js' %}"></script>
+        <script src="{% static 'inventory/js/uikit-icons.min.js' %}"></script>
+
+	</head>
+
+	<body uk-height-match="target:main">
+
+		{% block mainmenu %}
+		<nav class="uk-navbar-container uk-visible@m" uk-navbar>
+			<div class="uk-navbar-center">
+				<ul class="uk-navbar-nav">
+					{% for m in nav_menu %}
+					{% if select != m %}
+					<li><a class="uk-text-bold" href="{% url m.url_name %}">{{ m.title }}</a></li>
+					{% else %}
+					<li class="uk-active"><a class="uk-text-bold" href="{% url m.url_name %}">{{ m.title }}</a></li>
+					{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+		</nav>
+		{% endblock mainmenu %}
+
+		<div class="uk-padding">
+
+			{% block content %}
+			{% endblock %}
+
+		</div>
+
+		<div uk-height-viewport="expand: true"></div>
+
+		<footer class="uk-background-secondary">
+			<div class="uk-card uk-card-secondary uk-card-body uk-text-center uk-position-z-index" uk-sticky="position: bottom;">
+				<hr />
+				<!-- <p class="uk-margin-left uk-margin-remove-bottom">Copyright &copy; Acid Weaver. All Rights Reserved.</p> -->
+				<p class="uk-margin-left uk-margin-remove-top">Created by Acid Weaver. 
+				Powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a>, <a href="https://getuikit.com/" target="_blank">UIkit</a>.</p>
+			</div>
+		</footer>
+
+	</body>
+
+</html>

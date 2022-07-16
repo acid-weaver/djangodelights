@@ -11,8 +11,8 @@ class Ingredient(models.Model):
 		KILO = 'kg.', _('kilos')
 		LITER = 'L.', _('liters')
 		MLITER = 'ml.', _('milliliters')
-		AMOUNT = '', _('amount')
-	unit = models.CharField(max_length=3, blank=True, choices=PossibleUnits.choices, default=PossibleUnits.AMOUNT)
+		AMOUNT = 'num', _('amount')
+	unit = models.CharField(max_length=3, choices=PossibleUnits.choices, default=PossibleUnits.AMOUNT)
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	def __str__(self):
 		return self.title
@@ -31,7 +31,8 @@ class RecipeRequirement(models.Model):
 		return 'For {}: {} {} {}'.format(self.menu_item.title, str(self.require), self.ingredient.unit, self.ingredient.title)
 
 class Purchase(models.Model):
-	menu_items = models.ManyToManyField(MenuItem)
+	menu_items = models.JSONField(null=True)
 	client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+	time_create = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
 		return 'Purchase #{}'.format(self.pk)

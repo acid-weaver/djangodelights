@@ -1,0 +1,42 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<!-- context - object_list - massive of all Ingredient objects -->
+<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+	<div class="uk-width-expand uk-padding-remove">
+		<table class="uk-table uk-table-middle uk-table-divider">
+			<thead>
+				<tr>
+					<th>Ingredient</th>
+					<th>Quantity</th>
+					<th class="uk-table-shrink">Unit</th>
+					<th>Price per unit</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ingredient in object_list %}
+				<tr>
+					<td><h3>{{ ingredient.title }}</h3></td>
+					<td>{{ ingredient.quantity }}</td>
+					<td class="uk-table-shrink">{{ ingredient.unit }}</td>
+					<td>{{ ingredient.price }}</td>
+					<td>
+						<div class="uk-button-group">
+							<a class="uk-button uk-button-default uk-button-small" href="#">Edit</a>
+							<a class="uk-button uk-button-default uk-button-small" href="#">Delete</a>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+</div>
+{% endblock %}

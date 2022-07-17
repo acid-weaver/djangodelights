@@ -9,20 +9,18 @@
 		<table class="uk-table uk-table-middle uk-table-divider">
 			<thead>
 				<tr>
-					<th>Ingredient</th>
-					<th>Quantity</th>
-					<th class="uk-table-shrink">Unit</th>
-					<th>Price per unit</th>
+					<th>Dish</th>
+					<th></th>
+					<th>Price</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for ingredient in object_list %}
+				{% for item in object_list %}
 				<tr>
-					<td><h3>{{ ingredient.title }}</h3></td>
-					<td>{{ ingredient.quantity }}</td>
-					<td class="uk-table-shrink">{{ ingredient.unit }}</td>
-					<td>{{ ingredient.price }}</td>
+					<td><h3>{{ item.title }}</h3></td>
+					<td><a class="uk-button uk-button-default uk-button-small" href="#">Consist</a></td>
+					<td>{{ item.price }}</td>
 					<td>
 						<div class="uk-button-group">
 							<a class="uk-button uk-button-default uk-button-small" href="#">Edit</a>
@@ -33,7 +31,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<a class="uk-button uk-button-secondary uk-button-small" href="{% url 'create_ingredient' %}">Add new</a>
 	</div>
 
 	<div class="uk-width-1-6@m uk-invisible"></div>

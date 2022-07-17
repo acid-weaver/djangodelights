@@ -6,7 +6,6 @@
 
 		<meta charset="UTF-8">
 		<title>{{ title }}</title>
-		<!-- <link rel="icon" type="image/x-icon" href="/media/favicon.jpg"> -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'inventory/css/uikit.min.css' %}" />
         <script src="{% static 'inventory/js/uikit.min.js' %}"></script>
@@ -27,6 +26,13 @@
 					<li class="uk-active"><a class="uk-text-bold" href="{% url m.url_name %}">{{ m.title }}</a></li>
 					{% endif %}
 					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="uk-navbar-right">
+				<ul class="uk-navbar-nav">
+					<li><a class="uk-text-bold" href="#">Sign in</a></li>
+					<li><a class="uk-text-bold" href="{% url 'registration' %}">Sign up</a></li>
 				</ul>
 			</div>
 		</nav>

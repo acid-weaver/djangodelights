@@ -1,0 +1,22 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+	<div class="uk-width-expand uk-padding-remove">
+		<form method="POST">
+			<fieldset class="uk-fieldset">
+				<legend class="uk-legend uk-text-bold">Create new ingredient</legend>
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="uk-button uk-button-primary" type="submit">Register</button>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+</div>
+{% endblock %}

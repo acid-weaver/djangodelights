@@ -1,0 +1,60 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div class="uk-grid-match uk-margin-remove-left" uk-grid>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+	<div class="uk-width-expand uk-padding-remove">
+		<table class="uk-table uk-table-middle uk-table-divider">
+
+			<thead>
+				<tr>
+					<th>№</th>
+					<th>Customer</th>
+					<th></th>
+					<th>Total Price</th>
+					<th>Date</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for item in object_list %}
+				<tr>
+					<td>{{ item.id }}</td>
+					<td>{{ item.client }}</td>
+					<td><a class="uk-button uk-button-primary uk-button-small" href="#modal-center-{{ item.id }}" uk-toggle>Details</a></td>
+
+					<div id="modal-center-{{ item.id }}" class="uk-flex-top" uk-modal>
+						<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+					
+							<button class="uk-modal-close-default" type="button" uk-close></button>
+
+							{% for row in item.menu_items.items %}
+							<h3>{{ row.0 }}</h3>
+							<p>Amount - {{ row.1 }}</p>
+							{% endfor %}
+					
+						</div>
+					</div>
+
+					<td>{{ item.total_price }}</td>
+					<td>{{ item.time_create|date:"d-M-y" }}</td>
+					<td>
+						<div class="uk-button-group">
+							<a class="uk-button uk-button-default uk-button-small" href="#">Edit</a>
+							<a class="uk-button uk-button-default uk-button-small" href="#">Delete</a>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="uk-width-1-6@m uk-invisible"></div>
+
+</div>
+{% endblock %}

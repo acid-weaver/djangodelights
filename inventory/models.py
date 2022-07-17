@@ -24,7 +24,7 @@ class MenuItem(models.Model):
 		return self.title
 
 class RecipeRequirement(models.Model):
-	menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+	menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='recipe')
 	ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
 	require = models.DecimalField(max_digits=12, decimal_places=6, default=1)
 	def __str__(self):
@@ -36,3 +36,15 @@ class Purchase(models.Model):
 	time_create = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
 		return 'Purchase #{}'.format(self.pk)
+	@property
+	def total_price(self):
+		sum = 0
+		for item in dict(self.menu_items).items():
+			sum += MenuItem.objects.get(title=item[0]).price * item[1]
+		return sum
+	@property
+	def modify_inventory(self):
+		for item in self.menu_items.items():
+			for i in MenuItem.objects.get(title=item[0]).recipe.all():
+				i.ingredient.quantity -= i.require * item[1]
+		return

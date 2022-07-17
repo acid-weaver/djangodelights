@@ -30,10 +30,17 @@
 			</div>
 
 			<div class="uk-navbar-right">
+				{% if request.user.is_authenticated %}
 				<ul class="uk-navbar-nav">
-					<li><a class="uk-text-bold" href="#">Sign in</a></li>
+					<li><a class="uk-text-bold" href="#">{{ user.username }}<span uk-icon="icon: user"></span></a></li>
+					<li><a class="uk-text-bold" href="{% url 'logout' %}">Sign out</a></li>
+				</ul>
+				{% else %}
+				<ul class="uk-navbar-nav">
+					<li><a class="uk-text-bold" href="{% url 'login' %}">Sign in</a></li>
 					<li><a class="uk-text-bold" href="{% url 'registration' %}">Sign up</a></li>
 				</ul>
+				{% endif %}
 			</div>
 		</nav>
 		{% endblock mainmenu %}
@@ -50,7 +57,6 @@
 		<footer class="uk-background-secondary">
 			<div class="uk-card uk-card-secondary uk-card-body uk-text-center uk-position-z-index" uk-sticky="position: bottom;">
 				<hr />
-				<!-- <p class="uk-margin-left uk-margin-remove-bottom">Copyright &copy; Acid Weaver. All Rights Reserved.</p> -->
 				<p class="uk-margin-left uk-margin-remove-top">Created by Acid Weaver. 
 				Powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a>, <a href="https://getuikit.com/" target="_blank">UIkit</a>.</p>
 			</div>

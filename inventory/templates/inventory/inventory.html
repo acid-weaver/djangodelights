@@ -25,15 +25,15 @@
 					<td>{{ ingredient.price }}</td>
 					<td>
 						<div class="uk-button-group">
-							<a class="uk-button uk-button-default uk-button-small" href="#">Edit</a>
-							<a class="uk-button uk-button-default uk-button-small" href="#">Delete</a>
+							<a class="uk-button uk-button-default uk-button-small" href="{% url 'update_ingredient' ingredient.pk %}">Edit</a>
+							<a class="uk-button uk-button-default uk-button-small" href="{% url 'delete_ingredient' ingredient.pk %}">Delete</a>
 						</div>
 					</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-		<a class="uk-button uk-button-secondary uk-button-small" href="{% url 'create_ingredient' %}">Add new</a>
+		<a class="uk-button uk-button-secondary uk-button-small" href="{% url 'create_ingredient' %}">Add new ingredient</a>
 	</div>
 
 	<div class="uk-width-1-6@m uk-invisible"></div>

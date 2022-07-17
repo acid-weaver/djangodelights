@@ -43,8 +43,24 @@ class Purchase(models.Model):
 			sum += MenuItem.objects.get(title=item[0]).price * item[1]
 		return sum
 	@property
+	def total_expenses(self):
+		sum = 0
+		for item in self.menu_items.items():
+			for i in MenuItem.objects.get(title=item[0]).recipe.all():
+				sum += i.ingredient.price * i.require * item[1]
+		return sum
+	@property
+	def is_possible(self):
+		for item in self.menu_items.items():
+			for i in MenuItem.objects.get(title=item[0]).recipe.all():
+				i.ingredient.quantity -= i.require * item[1]
+				if i.ingredient.quantity < 0:
+					return False
+		return True
+	@property
 	def modify_inventory(self):
 		for item in self.menu_items.items():
 			for i in MenuItem.objects.get(title=item[0]).recipe.all():
 				i.ingredient.quantity -= i.require * item[1]
-		return
+				i.ingredient.save()
+		return True

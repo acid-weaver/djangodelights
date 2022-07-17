@@ -8,11 +8,7 @@
 	<div class="uk-width-expand uk-padding-remove">
 		<form method="POST">
 			{% csrf_token %}
-			<fieldset class="uk-fieldset">
-				<legend class="uk-legend uk-text-bold">Create new ingredient</legend>
-				{{ form.as_p }}
-			</fieldset>
-			<button class="uk-button uk-button-primary" type="submit">Add</button>
+			<button class="uk-button uk-button-danger uk-button-large" type="submit">Delete</button>
 		</form>
 	</div>
 

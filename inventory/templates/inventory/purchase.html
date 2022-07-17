@@ -42,16 +42,14 @@
 					<td>{{ item.total_price }}</td>
 					<td>{{ item.time_create|date:"d-M-y" }}</td>
 					<td>
-						<div class="uk-button-group">
-							<a class="uk-button uk-button-default uk-button-small" href="#">Edit</a>
-							<a class="uk-button uk-button-default uk-button-small" href="#">Delete</a>
-						</div>
+						<a class="uk-button uk-button-default uk-button-small" href="{% url 'delete_purchase' item.pk %}">Delete</a>
 					</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 
 		</table>
+		<a class="uk-button uk-button-secondary uk-button-small" href="{% url 'create_purchase' %}">Add new purchase</a>
 	</div>
 
 	<div class="uk-width-1-6@m uk-invisible"></div>

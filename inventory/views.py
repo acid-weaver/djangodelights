@@ -105,7 +105,7 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 class IngredientUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
 	model = Ingredient
 	form_class = IngredientUpdateForm
-	template_name = 'inventory/delete_confirm.html'
+	template_name = 'inventory/update_ingredient.html'
 	success_url = reverse_lazy('inventory')
 
 	def get_context_data(self, **kwargs):

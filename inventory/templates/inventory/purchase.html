@@ -32,8 +32,10 @@
 							<button class="uk-modal-close-default" type="button" uk-close></button>
 
 							{% for row in item.menu_items.items %}
+							{% if row.1 > 0 %}
 							<h3>{{ row.0 }}</h3>
 							<p>Amount - {{ row.1 }}</p>
+							{% endif %}
 							{% endfor %}
 					
 						</div>

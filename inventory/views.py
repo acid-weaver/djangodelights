@@ -67,7 +67,7 @@ class FinanceView(LoginRequiredMixin,DataMixin, TemplateView):
 
 class IngredientCreateView(LoginRequiredMixin, DataMixin, CreateView):
 	model = Ingredient
-	form_class = IngredientCreateForm
+	form_class = IngredientForm
 	template_name = 'inventory/create_ingredient.html'
 	success_url = reverse_lazy('inventory')
 
@@ -80,7 +80,7 @@ class IngredientCreateView(LoginRequiredMixin, DataMixin, CreateView):
 
 class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 	model = Purchase
-	form_class = PurchaseCreateForm
+	form_class = PurchaseForm
 	template_name = 'inventory/create_purchase.html'
 	success_url = reverse_lazy('purchase')
 
@@ -92,8 +92,8 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 		return dict(list(context.items()) + list(mixin_context.items()))
 	
 	def form_valid(self, form):
-		if form.instance.is_possible and form.is_valid():
-			form.instance.modify_inventory
+		if form.instance.is_possible and form.is_valid():	# check standart valid and is there enougth ingredient for this purchase (is_possible)
+			form.instance.modify_inventory					# we already checked that we have enougth ingredients, now we can modify their quantity after this purchase
 			form.save()
 		else:
 			raise ValidationError('Stock is too low for this purchase')
@@ -104,7 +104,7 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 
 class IngredientUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
 	model = Ingredient
-	form_class = IngredientUpdateForm
+	form_class = IngredientForm
 	template_name = 'inventory/update_ingredient.html'
 	success_url = reverse_lazy('inventory')
 

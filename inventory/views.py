@@ -96,7 +96,7 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 			form.instance.modify_inventory					# we already checked that we have enougth ingredients, now we can modify their quantity after this purchase
 			form.save()
 		else:
-			raise ValidationError('Stock is too low for this purchase')
+			raise forms.ValidationError('Stock is too low for this purchase')
 		res = super().form_valid(form)
 
 		return res

@@ -8,13 +8,6 @@
 	<div class="uk-width-expand uk-padding-remove">
 		<form method="POST">
 			{% csrf_token %}
-			<p class="uk-text-bold">Available menu items are:</p>
-			<ul class="uk-list uk-list-bullet">
-				{% for dish in menu_items %}
-				<li>{{ dish.title }}</li>
-				{% endfor %}
-			</ul>
-			<p class="uk-text-italic uk-text-muted">Rules to fill purchase - it should be in figural brackets, then you choose dish, enter it's title in quotation marks, after it write colon (:), and after them enter how much of that dish you want, then add comma and repeat for next dish or close figural brackets. Example: {"Coffee": 5, "Django Djaffa Cake": 1}</p>
 			<fieldset class="uk-fieldset">
 				<legend class="uk-legend uk-text-bold">Create new purchase</legend>
 				{{ form.as_p }}

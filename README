@@ -7,6 +7,8 @@ Plans:
 -Full functionality of Menu view (with restriction to add new menu items and change recipes for not admins)
 -Improve DB - delete RecipeRequirement table and add recipe field (JSON) to MenuItem table. Would works like Purchase table.
 
+
+-------------
 PROJECT TASK:
 
 You’ve been asked by a restaurant owner to build an application that will help keep track of how much food they have throughout the day. The owner starts the day with:

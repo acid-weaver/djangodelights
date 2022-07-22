@@ -23,4 +23,5 @@ Knowing that information, the restaurant, Django Delights’ owner has asked for
 
 1. They should be able to enter in new recipes along with their recipe requirements, and how much that menu item costs.
 2. They should also be able to add to the inventory a name of an ingredient, its price per unit, and how much of that item is available.
-3. They should be able to enter in a customer purchase of a menu item. When a customer purchases an item off the menu, the inventory should be modified to accommodate what happened, as well as recording the time that the purchase was made.
+3. They should be able to enter in a customer purchase of a menu item. When a customer purchases an item off the menu, the inventory should be modified to accommodate
+   what happened, as well as recording the time that the purchase was made.

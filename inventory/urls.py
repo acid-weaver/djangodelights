@@ -1,8 +1,10 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
+from django.views.generic.base import RedirectView
 from .views import *
 
 
 urlpatterns = [
+	path('', RedirectView.as_view(url=reverse_lazy('menu')), name='start_page'),
 	path('inventory', WarehouseView.as_view(), name='inventory'),
 	path('inventory/add', IngredientCreateView.as_view(), name='create_ingredient'),
 	path('inventory/<pk>', IngredientUpdateView.as_view(), name='update_ingredient'),
@@ -16,3 +18,5 @@ urlpatterns = [
 	path('login', LoginUser.as_view(), name='login'),
 	path('logout', LogoutUser, name='logout'),
 ]
+
+handler404 = pageNotFound

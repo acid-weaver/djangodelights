@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.forms import ValidationError
+from django.http import HttpResponseNotFound
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -7,24 +7,12 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ValidationError
 from .models import *
 from .forms import *
 from .utils import *
 
 
 # Create your views here.
-class WarehouseView(LoginRequiredMixin, DataMixin, ListView):
-	model = Ingredient
-	template_name = 'inventory/inventory.html'
-
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		mixin_context = self.get_user_context(title='Inventory', select=1)
-
-		return dict(list(context.items()) + list(mixin_context.items()))
-
-
 class MenuView(DataMixin, ListView):
 	model = MenuItem
 	template_name = 'inventory/menu.html'
@@ -32,6 +20,17 @@ class MenuView(DataMixin, ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		mixin_context = self.get_user_context(title='Menu', select=0)
+
+		return dict(list(context.items()) + list(mixin_context.items()))
+
+
+class WarehouseView(LoginRequiredMixin, DataMixin, ListView):
+	model = Ingredient
+	template_name = 'inventory/inventory.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		mixin_context = self.get_user_context(title='Inventory', select=1)
 
 		return dict(list(context.items()) + list(mixin_context.items()))
 
@@ -92,12 +91,9 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 		return dict(list(context.items()) + list(mixin_context.items()))
 	
 	def form_valid(self, form):
-		if form.instance.is_possible and form.is_valid():	# check standart valid and is there enougth ingredient for this purchase (is_possible)
-			form.instance.modify_inventory					# we already checked that we have enougth ingredients, now we can modify their quantity after this purchase
-			form.save()
-		else:
-			raise forms.ValidationError('Stock is too low for this purchase')
 		res = super().form_valid(form)
+		form.instance.modify_inventory					# we already checked in PurchaseForm.clean() that we have enough ingredients, now we can modify their quantity after this purchase
+		form.save()
 
 		return res
 
@@ -138,7 +134,7 @@ class IngredientDeleteView(LoginRequiredMixin, DataMixin, DeleteView):
 
 		return dict(list(context.items()) + list(mixin_context.items()))
 
-
+# User functionality views:
 class RegisterUser(DataMixin, CreateView):
 	form_class = RegisterUserForm
 	template_name = 'inventory/registration.html'
@@ -173,3 +169,7 @@ class LoginUser(DataMixin, LoginView):
 def LogoutUser(request):
 	logout(request)
 	return redirect('login')
+
+#Exceptions
+def pageNotFound(request, exception):
+	return HttpResponseNotFound('<h1>ERROR 404</h1><br><p>Page Not Found</p>')

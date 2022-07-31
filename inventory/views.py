@@ -91,8 +91,10 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 		return dict(list(context.items()) + list(mixin_context.items()))
 	
 	def form_valid(self, form):
+		form.instance.client = self.request.user
 		res = super().form_valid(form)
 		form.instance.modify_inventory					# we already checked in PurchaseForm.clean() that we have enough ingredients, now we can modify their quantity after this purchase
+		
 		form.save()
 
 		return res

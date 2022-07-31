@@ -35,7 +35,7 @@ class RecipeRequirement(models.Model):
 
 class Purchase(models.Model):
 	menu_items = models.JSONField(null=True)
-	client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+	client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True)
 	time_create = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
 		return 'Purchase #{}'.format(self.pk)

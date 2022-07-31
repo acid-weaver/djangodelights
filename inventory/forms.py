@@ -36,6 +36,7 @@ class PurchaseForm(forms.ModelForm):
 		cleaned_data['menu_items'] = menu_items	# this would be saved to DB
 
 	menu_items = forms.JSONField(required=False, widget=forms.HiddenInput())	# fake invisible field just to ModelForm methods save it to DB
+	client = forms.ModelChoiceField(queryset=User.objects.all(), required=False, widget=forms.HiddenInput())
 	class Meta:
 		model = Purchase
 		fields = '__all__'

@@ -35,7 +35,7 @@ class WarehouseView(LoginRequiredMixin, DataMixin, ListView):
 		return dict(list(context.items()) + list(mixin_context.items()))
 
 
-class PurchaseView(LoginRequiredMixin,DataMixin, ListView):
+class PurchaseView(LoginRequiredMixin, DataMixin, ListView):
 	model = Purchase
 	template_name = 'inventory/purchase.html'
 
@@ -46,7 +46,7 @@ class PurchaseView(LoginRequiredMixin,DataMixin, ListView):
 		return dict(list(context.items()) + list(mixin_context.items()))
 
 
-class FinanceView(LoginRequiredMixin,DataMixin, TemplateView):
+class FinanceView(LoginRequiredMixin, DataMixin, TemplateView):
 	template_name = 'inventory/bookkeeping.html'
 
 	def get_context_data(self, **kwargs):
@@ -93,8 +93,7 @@ class PurchaseCreateView(LoginRequiredMixin, DataMixin, CreateView):
 	def form_valid(self, form):
 		form.instance.client = self.request.user
 		res = super().form_valid(form)
-		form.instance.modify_inventory					# we already checked in PurchaseForm.clean() that we have enough ingredients, now we can modify their quantity after this purchase
-		
+		form.instance.modify_inventory					# we already checked in PurchaseForm.clean() that we have enough ingredients, now we can modify their quantity after this purchase	
 		form.save()
 
 		return res

@@ -11,7 +11,6 @@ Plans:
 -Optimization (DB requests and cache)
 -Full functionality of Menu view (with restriction to add new menu items and change recipes for not admins)
 -Improve DB - delete RecipeRequirement table and add recipe field (JSON) to MenuItem table. Would works like Purchase table
--Autofill user field in purchase form
 
 
 -------------

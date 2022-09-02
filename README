@@ -4,14 +4,13 @@ password: 123
 Project on DockerHub! Install Docker, then run commands:
 docker pull acidweaver/djangodelights:26.07.22
 docker run --publish 8000:8000 acidweaver/djangodelights:26.07.22
-Then run brauser at localhost:8000
+Then run browser at localhost:8000
 
 Plans: 
 -Error handlers, try-except blocks
--Optimization (DB requests and cash)
+-Optimization (DB requests and cache)
 -Full functionality of Menu view (with restriction to add new menu items and change recipes for not admins)
 -Improve DB - delete RecipeRequirement table and add recipe field (JSON) to MenuItem table. Would works like Purchase table
--Autofill user field in purchase form
 
 
 -------------
